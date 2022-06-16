@@ -1,0 +1,10 @@
+.seciton-form__input:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.seciton-form__input{
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 20px;
+    border-color: black;
+}

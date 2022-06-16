@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10.6</title>
+
+    <link rel="stylesheet" href="src/css/normalize.css">
+    <link rel="stylesheet" href="src/css/style.css">
+
+    <script src="src/js/section-students/__button/section-students__button.js" defer></script>
+</head>
+<body>
+    <main>
+        <section class="section-students">
+            <div class="container section-students__container">
+                <table class="section-students__table" border="1" cellspacing="1" cellpadding="1">
+                    <tr class="section-students__table-header">
+                       <td class="section-students__table-col_header section-students__table-col">имя</td>
+                       <td class="section-students__table-col_header section-students__table-col">фамилия</td>
+                       <td class="section-students__table-col_header section-students__table-col">отчество</td>
+                       <td class="section-students__table-col_header section-students__table-col">дата рождения</td>
+                       <td class="section-students__table-col_header section-students__table-col">год начала обучения</td>
+                       <td class="section-students__table-col_header section-students__table-col">факультет</td>
+                    </tr>
+                    <tr class="section-students__table-body">
+                       <td class="section-students__table-col">Ячейка 4</td>
+                       <td class="section-students__table-col">Ячейка 5</td>
+                       <td class="section-students__table-col">Ячейка 6</td>
+                       <td class="section-students__table-col">Ячейка 4</td>
+                       <td class="section-students__table-col">Ячейка 5</td>
+                       <td class="section-students__table-col">Ячейка 6</td>
+                    </tr>
+                 </table>
+                 <button class="section-students__button section-students__button_hide btn">
+                    <img 
+                        class="section-students__arrow-icon section-students__arrow-icon_hide" 
+                        src="src/img/section-students/__arrow-icon/section-students__arrow-icon.svg" 
+                        alt="arrow-icon">
+                    Скрыть таблицу
+                 </button>
+                 <button class="section-students__button section-students__button_show d-none btn">
+                    <img 
+                    class="section-students__arrow-icon section-students__arrow-icon_show" 
+                    src="src/img/section-students/__arrow-icon/section-students__arrow-icon.svg"
+                    alt="arrow-icon">
+                    Показать таблицу
+                 </button>
+            </div>
+        </section>
+        <seciton class="seciton-form">
+            <div class="container section-form__container">
+                <form class="seciton-form__form">
+                    <input
+                        id="name"
+                        name="name"
+                        class="seciton-form__input" 
+                        placeholder="Имя*">
+                    <input
+                        id="surname"
+                        name="surname"
+                        class="seciton-form__input" 
+                        placeholder="Фамилия*">
+                    <input
+                        id="patronymic"
+                        name="patronymic"
+                        class="seciton-form__input" 
+                        placeholder="Отчество*">
+                    <input
+                        id="birthdate"
+                        name="birthdate"
+                        class="seciton-form__input" 
+                        placeholder="Дата рождения*">
+                    <input 
+                        id="studyyear"
+                        name="studyyear"
+                        class="seciton-form__input" 
+                        placeholder="Год начала обучения*">
+                    <input
+                        id="faculty"
+                        name="faculty"
+                        class="seciton-form__input" 
+                        placeholder="Факультет*">
+                    <button type="submit" class="section-form__submit-button btn">
+                        Добавить
+                    </button>
+                </form>
+    
+            </div>
+        </seciton>
+    </main>
+</body>
+</html>
+    

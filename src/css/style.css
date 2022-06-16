@@ -1,0 +1,11 @@
+@import url(/src/css/_values/style_values.css);
+@import url(/src/css/section-students/section-students.css);
+@import url(/src/css/section-form/seciton-form.css);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #EEF2F3;
+}

@@ -1,0 +1,6 @@
+@import url(/src/css/section-students/__button/_hide/section-students__button_hide.css);
+@import url(/src/css/section-students/__button/_show/section-students__button_show.css);
+
+.section-students__button {
+    justify-content: space-between;
+}
