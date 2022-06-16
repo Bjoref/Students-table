@@ -59,7 +59,7 @@ The first table of the table is a header table, it always contains column headin
 **Clicking on a cell in the header row should sort by the corresponding student fields:**
 - Full name sorts by the connected line from the last name, first name and patronymic in alphabetical order in ascending order;
 - Faculty - by faculty in alphabetical order in ascending order;
-- DR and age - by date of birth in ascending order;
+- BD and age - by date of birth in ascending order;
 - Years of study - according to the year of beginning of study.
 
 **Before the table, you also need to display filters consisting of fields:**
