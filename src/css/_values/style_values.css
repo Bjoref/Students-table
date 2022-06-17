@@ -10,6 +10,10 @@
     display: none !important;
 }
 
+.mb-1 {
+    margin-bottom: 10px !important;
+}
+
 .btn {
     font-size: 20px;
     padding: 20px;

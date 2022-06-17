@@ -2,9 +2,24 @@
     margin-bottom: 20px;
 }
 
-.seciton-form__input{
+.seciton-form__input {
     font-size: 18px;
     padding: 10px;
+    padding-right: 40px;
     border-radius: 20px;
-    border-color: black;
+    border: 2px solid black;
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
+    background-size: 32px 32px;
+}
+
+.seciton-form__input.valid {
+    border: 2px solid #0c322a;
+    background-image: url(/src/img/icons/icon-valid.svg);
+}
+
+.seciton-form__input.invalid {
+    border: 2px solid #8b0000;
+    background-image: url(/src/img/icons/icon-invalid.svg);
 }
