@@ -11,6 +11,7 @@
 
     <script src="src/js/section-students/__button/section-students__button.js" defer></script>
     <script src="src/js/section-form/__form/section-form__form.js" defer></script>
+    <script src="src/js/section-form/__button/section-form__button.js" defer></script>
 </head>
 <body>
     <main>
@@ -52,38 +53,48 @@
         </section>
         <seciton class="seciton-form">
             <div class="container section-form__container">
-                <form class="seciton-form__form">
-                    <input
+                <button class="section-form__button btn">
+                    Добавить студента
+                </button>
+                <form class="section-form__form d-none">
+                    <input 
+                        autocomplete="off"
                         id="name"
                         name="name"
                         class="seciton-form__input" 
                         placeholder="Имя*">
                     <span class="section-form__input-error"></span>
-                    <input
+                    <input 
+                        autocomplete="off"
                         id="surname"
                         name="surname"
                         class="seciton-form__input" 
                         placeholder="Фамилия*">
                     <span class="section-form__input-error"></span>
-                    <input
+                    <input 
+                        autocomplete="off"
                         id="patronymic"
                         name="patronymic"
                         class="seciton-form__input" 
                         placeholder="Отчество*">
                     <span class="section-form__input-error"></span>
-                    <input
+                    <input 
+                        autocomplete="off"
                         id="birthdate"
+                        maxlength="10"
                         name="birthdate"
                         class="seciton-form__input" 
                         placeholder="Дата рождения*">
                     <span class="section-form__input-error"></span>
                     <input 
+                        autocomplete="off" 
                         id="studyyear"
                         name="studyyear"
                         class="seciton-form__input" 
                         placeholder="Год начала обучения*">
                     <span class="section-form__input-error"></span>
-                    <input
+                    <input 
+                        autocomplete="off"
                         id="faculty"
                         name="faculty"
                         class="seciton-form__input" 
