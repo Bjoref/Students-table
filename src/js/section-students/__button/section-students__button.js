@@ -19,5 +19,20 @@
                 }; 
             };
         });
+        button.addEventListener('mouseover', (element) => {
+            if(element.target.classList.contains('section-students__button')) {
+                element.target.childNodes[1].setAttribute('src', "src/img/section-students/__arrow-icon/section-students__arrow-icon_hover.svg")
+            } else if (element.target.classList.contains('section-students__arrow-icon')) {
+                element.target.setAttribute('src', "src/img/section-students/__arrow-icon/section-students__arrow-icon_hover.svg")
+                
+            };
+        });
+        button.addEventListener('mouseout', (element) => {
+            if(element.target.classList.contains('section-students__button')) {
+                element.target.childNodes[1].setAttribute('src', "src/img/section-students/__arrow-icon/section-students__arrow-icon.svg")
+            } else if (element.target.classList.contains('section-students__arrow-icon')) {
+                element.target.setAttribute('src', "src/img/section-students/__arrow-icon/section-students__arrow-icon.svg")
+            };
+        });
     });
 })();

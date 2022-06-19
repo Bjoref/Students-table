@@ -2,6 +2,11 @@
 @import url(/src/css/section-students/section-students.css);
 @import url(/src/css/section-form/seciton-form.css);
 
+:root {
+  --brand-color: #0c322a;
+  --error-color: #8b0000;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -13,6 +13,8 @@ const studyyearInput = document.querySelector('#studyyear');
 const facultyInput = document.querySelector('#faculty');
 
 let birthdateInputArray = [];
+let validArray = [];
+let validCounter = 0;
 let errorText = '';
 
 const addValid = (input) => {
@@ -22,6 +24,14 @@ const addValid = (input) => {
   input.classList.add('valid');
   input.classList.remove('invalid');
   input.classList.remove('mb-1');
+  validArray.push(input);
+  function contains(validArray, input) {
+    console.log(validArray.indexOf(input))
+    return validArray.indexOf(input) != -1;
+  }
+  contains(validArray, input)
+  console.log(validArray)
+
 }
 
 const addInValid = (input, errorText) => {
@@ -33,6 +43,7 @@ const addInValid = (input, errorText) => {
   error.classList.add('mb-1');
   input.classList.remove('valid');
   errorText = '';
+  validArray.pop();
 }
 
 const removeInvalid = (input) => {

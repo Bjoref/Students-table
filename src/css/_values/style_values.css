@@ -24,8 +24,13 @@
     justify-content: center;
     border: none;
     border-radius: 100px;
-    background-color: #0c322a;
+    background-color: var(--brand-color);
     color: #fff;
     font-weight: bold;
 }
 
+.btn:hover {
+    background-color: #fff;
+    color: var(--brand-color);
+    outline: 2px solid var(--brand-color);
+}
