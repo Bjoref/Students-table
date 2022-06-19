@@ -14,12 +14,16 @@
     background-size: 32px 32px;
 }
 
-.seciton-form__input.valid {
+.seciton-form__input.valid,
+.seciton-form__input:focus-visible.valid {
     border: 2px solid #0c322a;
+    outline: 2px solid #0c322a;
     background-image: url(/src/img/icons/icon-valid.svg);
 }
 
-.seciton-form__input.invalid {
+.seciton-form__input.invalid,
+.seciton-form__input:focus-visible.invalid {
     border: 2px solid #8b0000;
+    outline: 2px solid #8b0000;
     background-image: url(/src/img/icons/icon-invalid.svg);
 }

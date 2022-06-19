@@ -14,6 +14,8 @@ const facultyInput = document.querySelector('#faculty');
 
 let birthdateInputArray = [];
 let validArray = [];
+let uniqArray;
+let studentPreObject = {}
 let validCounter = 0;
 let errorText = '';
 
@@ -25,13 +27,11 @@ const addValid = (input) => {
   input.classList.remove('invalid');
   input.classList.remove('mb-1');
   validArray.push(input);
-  function contains(validArray, input) {
-    console.log(validArray.indexOf(input))
-    return validArray.indexOf(input) != -1;
+  const makeUniq = (validArray) => {
+    uniqArray = new Set(validArray);
+    return [...uniqArray];
   }
-  contains(validArray, input)
-  console.log(validArray)
-
+  makeUniq(validArray)
 }
 
 const addInValid = (input, errorText) => {
@@ -114,7 +114,6 @@ const birthdateValidation = () => {
         addInValid(input, errorText);
       }
     };
-      
 
     let date = new Date()
     // console.log(Date.now());
@@ -128,18 +127,34 @@ const inputValidation = () => {
     switch (input) {
         case nameInput:
           if(input.value.length >= 3) {
-            addValid(input)
+            addValid(input);
+            studentPreObject.name = input;
           } else {
             errorText = 'Минимум 3 символа'
-            addInValid(input, errorText)
+            addInValid(input, errorText);
+            delete studentPreObject.name;
           };
-          break;
+        break;
         case surnameInput:
-          console.log(2);
+          if(input.value.length >= 3) {
+            addValid(input);
+            studentPreObject.surname = input;
+          } else {
+            errorText = 'Минимум 3 символа'
+            addInValid(input, errorText);
+            delete studentPreObject.surname;
+          };
         break;
         case patronymicInput:
-          console.log(3);
-          break;
+          if(input.value.length >= 3) {
+            addValid(input);
+            studentPreObject.patronymic = input;
+          } else {
+            errorText = 'Минимум 3 символа';
+            addInValid(input, errorText);
+            delete studentPreObject.patronymic;
+          };
+        break;
         case birthdateInput:
             birthdateValidation();
         break;
@@ -152,11 +167,17 @@ const inputValidation = () => {
         default:
             console.log(7);
       };
+      // for (key in studentPreObject) {
+      //   console.log(key)
+      // }
 };
 
 inputGroup.forEach((input) => {
     input.addEventListener('input', inputValidation);
     input.addEventListener('keyup', inputValidation);
+    if(input.id == 'name' || input.id == 'patronymic' || input.id == 'surname') {
+      input.addEventListener('keypress', noDigitsNEng);
+    }
 });
 
 birthdateInput.addEventListener('keydown', () => {
@@ -176,6 +197,11 @@ birthdateInput.addEventListener('keydown', () => {
 birthdateInput.addEventListener('cut', (event) => {
   console.log(event.target)
 })
+
+const noDigitsNEng= (event) => {
+  if ("1234567890".indexOf(event.key) != -1 || "qwertyuiopasdfghjklzxcvbnm".indexOf(event.key) != -1)
+    event.preventDefault();
+}
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
