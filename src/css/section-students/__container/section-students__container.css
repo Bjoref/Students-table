@@ -1,8 +1,9 @@
 .section-students__container {
     min-height: 120px;
-    padding-bottom: 0;
     margin-bottom: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
 }

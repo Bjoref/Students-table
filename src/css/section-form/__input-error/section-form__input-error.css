@@ -1,3 +1,5 @@
 .section-form__input-error {
     color: #8b0000;
+    max-width: 272px;
+    text-align: center;
 }

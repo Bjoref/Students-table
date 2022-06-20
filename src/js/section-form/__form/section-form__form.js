@@ -18,6 +18,7 @@ let uniqArray;
 let studentPreObject = {}
 let validCounter = 0;
 let errorText = '';
+let isInvalid = false; 
 
 const addValid = (input) => {
   let error = input.nextSibling.nextSibling;
@@ -27,11 +28,7 @@ const addValid = (input) => {
   input.classList.remove('invalid');
   input.classList.remove('mb-1');
   validArray.push(input);
-  const makeUniq = (validArray) => {
-    uniqArray = new Set(validArray);
-    return [...uniqArray];
-  }
-  makeUniq(validArray)
+  isInvalid = false;
 }
 
 const addInValid = (input, errorText) => {
@@ -44,6 +41,32 @@ const addInValid = (input, errorText) => {
   input.classList.remove('valid');
   errorText = '';
   validArray.pop();
+  isInvalid = true;
+}
+
+const makeUniq = (validArray) => {
+  uniqArray = new Set(validArray);
+  return [...uniqArray];
+}
+
+const noDigitsNEng= (event) => {
+  if ("1234567890".indexOf(event.key) != -1 || "qwertyuiopasdfghjklzxcvbnm".indexOf(event.key) != -1)
+    event.preventDefault();
+}
+
+const digits = (event) => {
+  if (event.keyCode < 48 || event.keyCode > 57)
+  event.returnValue= false;
+}
+
+const disableBtn = (button) => {
+  button.disabled = true;
+  button.classList.add('disabled');
+}
+ 
+const ableBtn = (button) => {
+  button.disabled = false;
+  button.classList.remove('disabled');
 }
 
 const removeInvalid = (input) => {
@@ -56,9 +79,14 @@ const removeInvalid = (input) => {
 
 const birthdateValidation = () => {
     let input = event.target;
-    let length = birthdateInputArray.length
-    let inputLength = input.value.length
-    let error = input.nextSibling.nextSibling;
+    if(isInvalid) {
+      input.setAttribute('maxlength', 10);
+    } else {
+      input.setAttribute('maxlength', 15);
+    }
+    let todayDate;
+    let length = birthdateInputArray.lengt;
+    let inputLength = input.value.length;
 
     switch (inputLength) {
       case 2:
@@ -88,9 +116,16 @@ const birthdateValidation = () => {
       };
     };
 
+    if(inputLength < 14) {
+      errorText = 'Указана некорректная дата, необходимый формат: "DD/MM/YEAR"';
+      addInValid(input, errorText)
+    } else {
+      addValid(input)
+    }
+
+
     if(inputLength == 3) {
       let testSting = input.value.slice(0, -1)
-      console.log(testSting)
       if(Number(testSting) > 32) {
         errorText = 'Указано некорректное количество дней';
         addInValid(input, errorText);
@@ -106,12 +141,25 @@ const birthdateValidation = () => {
     }
 
     if(inputLength == 10) {
+      let currentYear = new Date().getFullYear()
       let days = input.value.slice(0, -8)
       let month = input.value.slice(3, -5)
       let year = input.value.slice(-4)
-      if(days > 32 || month > 12 || year < 1900 || year > 2022) {
-        errorText = 'Указана некорректная дата';
+      if(year < 1900 || year > currentYear) {
+        console.log(year)
+        errorText = 'Указан некорректный год';
         addInValid(input, errorText);
+        input.maxlength = 10;
+        return
+      }
+      todayDate = new Date(year, (month-1), days).getFullYear();
+      let yearCount = currentYear - todayDate;
+      input.value = input.value + ` (${yearCount})`;
+      if(!isInvalid) {
+        addValid(input);
+      } else {
+        errorText = 'Указана некорректная дата';
+        addInValid(input, errorText)
       }
     };
 
@@ -167,6 +215,19 @@ const inputValidation = () => {
         default:
             console.log(7);
       };
+
+      makeUniq(validArray);
+      
+      if(document.querySelectorAll('.invalid').length) {
+        disableBtn(document.querySelector('.section-form__submit-button'));
+      } else {
+        ableBtn(document.querySelector('.section-form__submit-button'));
+      };
+      if(uniqArray.length !== 6) {
+        disableBtn(document.querySelector('.section-form__submit-button'));
+      } else {
+        ableBtn(document.querySelector('.section-form__submit-button'));
+      };
       // for (key in studentPreObject) {
       //   console.log(key)
       // }
@@ -177,6 +238,9 @@ inputGroup.forEach((input) => {
     input.addEventListener('keyup', inputValidation);
     if(input.id == 'name' || input.id == 'patronymic' || input.id == 'surname') {
       input.addEventListener('keypress', noDigitsNEng);
+    };
+    if(input.id == 'birthdate' || input.id == 'studyyear') {
+      input.addEventListener('keypress', digits);
     }
 });
 
@@ -191,17 +255,16 @@ birthdateInput.addEventListener('keydown', () => {
       string = string.slice(0, -1);
       event.target.value = string;
     }
+    if (last == '(') {
+      string = string.slice(0, -2);
+      event.target.value = string;
+    }
   }
 })
 
 birthdateInput.addEventListener('cut', (event) => {
   console.log(event.target)
 })
-
-const noDigitsNEng= (event) => {
-  if ("1234567890".indexOf(event.key) != -1 || "qwertyuiopasdfghjklzxcvbnm".indexOf(event.key) != -1)
-    event.preventDefault();
-}
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();

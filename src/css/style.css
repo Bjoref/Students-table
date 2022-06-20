@@ -5,6 +5,7 @@
 :root {
   --brand-color: #0c322a;
   --error-color: #8b0000;
+  --disabled-color: grey;
 }
 
 * {
@@ -13,4 +14,16 @@
 
 body {
   background-color: #EEF2F3;
+}
+
+.disabled {
+  background-color: var(--disabled-color);
+  color: black;
+}
+
+.disabled:hover {
+  background-color: var(--disabled-color);
+  color: black;
+  outline: none;
+  cursor: not-allowed;
 }

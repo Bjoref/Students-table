@@ -4,6 +4,7 @@
 
 .seciton-form__input {
     font-size: 18px;
+    max-width: 272px;
     padding: 10px;
     padding-right: 40px;
     border-radius: 20px;
