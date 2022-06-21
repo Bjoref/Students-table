@@ -1,5 +1,6 @@
 @import url(/src/css/section-form/__form/section-form__form.css);
 @import url(/src/css/section-form/__input/seciton-form__input.css);
 @import url(/src/css/section-form/__container/section-form__container.css);
-@import url(/src/css/section-form/__input-error/section-form__input-error.css);
+@import url(/src/css/section-form/__error-field/section-form__error-field.css);
 @import url(/src/css/section-form/__button/section-form__button.css);
+@import url(/src/css/section-form/__close-img/section-form__close-img.css);
