@@ -399,7 +399,7 @@ form.addEventListener('submit', (event) => {
     elementAdding(studentPreObject, element, newTR)
   };
   
-  // form.classList.add('d-none');
-  // showButton.classList.remove('d-none');
+  form.classList.add('d-none');
+  showButton.classList.remove('d-none');
 });
 })();
