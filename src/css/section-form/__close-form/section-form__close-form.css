@@ -1,0 +1,21 @@
+.section-form__close-form {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    background-image: url(/src/img/icons/cross-green.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.section-form__close-form:hover {
+    background-image: url(/src/img/icons/cross.svg);
+}
+
+.section-form__close-form:active {
+    background-image: url(/src/img/icons/cross-green.svg);
+}

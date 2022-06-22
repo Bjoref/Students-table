@@ -12,6 +12,7 @@
     <script src="src/js/section-students/__button/section-students__button.js" defer></script>
     <script src="src/js/section-form/__form/section-form__form.js" defer></script>
     <script src="src/js/section-form/__button/section-form__button.js" defer></script>
+    <script src="src/js/section-form/__close-form/section-form__close-form.js" defer></script>
 </head>
 <body>
     <main>
@@ -19,30 +20,30 @@
             <div class="container section-students__container">
                 <table class="section-students__table" border="1" cellspacing="1" cellpadding="1">
                     <tr class="section-students__table-header">
-                       <td class="section-students__table-col_header section-students__table-col">имя</td>
-                       <td class="section-students__table-col_header section-students__table-col">фамилия</td>
-                       <td class="section-students__table-col_header section-students__table-col">отчество</td>
-                       <td class="section-students__table-col_header section-students__table-col">дата рождения</td>
-                       <td class="section-students__table-col_header section-students__table-col">год начала обучения</td>
-                       <td class="section-students__table-col_header section-students__table-col">факультет</td>
+                       <td class="section-students__table-col_header section-students__table-col" id="nameCol">имя</td>
+                       <td class="section-students__table-col_header section-students__table-col" id="surnameCol">фамилия</td>
+                       <td class="section-students__table-col_header section-students__table-col" id="patronymicCol">отчество</td>
+                       <td class="section-students__table-col_header section-students__table-col" id="birthdateCol">дата рождения</td>
+                       <td class="section-students__table-col_header section-students__table-col" id="studyyearCol">год начала обучения</td>
+                       <td class="section-students__table-col_header section-students__table-col" id="facultyCol">факультет</td>
                     </tr>
                     <tr class="section-students__table-body">
-                       <td class="section-students__table-col">Ячейка 4</td>
+                       <!-- <td class="section-students__table-col">Ячейка 4</td>
                        <td class="section-students__table-col">Ячейка 5</td>
                        <td class="section-students__table-col">Ячейка 6</td>
                        <td class="section-students__table-col">Ячейка 4</td>
                        <td class="section-students__table-col">Ячейка 5</td>
-                       <td class="section-students__table-col">Ячейка 6</td>
+                       <td class="section-students__table-col">Ячейка 6</td> -->
                     </tr>
                  </table>
-                 <button class="section-students__button section-students__button_hide btn">
+                 <button class="section-students__button section-students__button_hide btn pointer">
                     <img 
                         class="section-students__arrow-icon section-students__arrow-icon_hide" 
                         src="src/img/section-students/__arrow-icon/section-students__arrow-icon.svg" 
                         alt="arrow-icon">
                     Скрыть таблицу
                  </button>
-                 <button class="section-students__button section-students__button_show d-none btn">
+                 <button class="section-students__button section-students__button_show d-none btn pointer">
                     <img 
                     class="section-students__arrow-icon section-students__arrow-icon_show" 
                     src="src/img/section-students/__arrow-icon/section-students__arrow-icon.svg"
@@ -53,31 +54,34 @@
         </section>
         <seciton class="seciton-form">
             <div class="container section-form__container">
-                <button class="section-form__button btn">
+                <button class="section-form__button btn pointer">
                     Добавить студента
                 </button>
                 <form class="section-form__form d-none">
+                    <button class="section-form__close-form">
+                        <img class="section-form__close-img pointer" src="src/img/icons/cross.svg">
+                    </button>
                     <input 
                         autocomplete="off"
                         id="name"
                         name="name"
                         class="seciton-form__input" 
                         placeholder="Имя*">
-                    <span class="section-form__input-error"></span>
+                    <span class="section-form__input-error section-form__error-field"></span>
                     <input 
                         autocomplete="off"
                         id="surname"
                         name="surname"
                         class="seciton-form__input" 
                         placeholder="Фамилия*">
-                    <span class="section-form__input-error"></span>
+                    <span class="section-form__input-error section-form__error-field"></span>
                     <input 
                         autocomplete="off"
                         id="patronymic"
                         name="patronymic"
                         class="seciton-form__input" 
                         placeholder="Отчество*">
-                    <span class="section-form__input-error"></span>
+                    <span class="section-form__input-error section-form__error-field"></span>
                     <input 
                         autocomplete="off"
                         id="birthdate"
@@ -85,7 +89,7 @@
                         name="birthdate"
                         class="seciton-form__input" 
                         placeholder="Дата рождения*">
-                    <span class="section-form__input-error"></span>
+                    <span class="section-form__input-error section-form__error-field"></span>
                     <input 
                         autocomplete="off" 
                         id="studyyear"
@@ -93,19 +97,21 @@
                         maxlength="18"
                         class="seciton-form__input" 
                         placeholder="Год начала обучения*">
-                    <span class="section-form__input-error"></span>
+                    <span class="section-form__input-error section-form__error-field"></span>
                     <input 
                         autocomplete="off"
                         id="faculty"
                         name="faculty"
                         class="seciton-form__input" 
                         placeholder="Факультет*">
-                    <span class="section-form__input-error"></span>
-                    <button type="submit" class="section-form__submit-button btn">
+                    <span class="section-form__input-error section-form__error-field"></span>
+                    <button type="submit" class="section-form__submit-button btn pointer">
                         Добавить
                     </button>
+                    <span class="section-form__button-error section-form__error-field d-none">
+                        Поля не заполнены и/или заполнены некорректно
+                    </span>
                 </form>
-    
             </div>
         </seciton>
     </main>

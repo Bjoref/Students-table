@@ -1,10 +1,7 @@
 (() => {
 const form = document.querySelector('.section-form__form');
 const showButton = document.querySelector('.section-form__button');
-
-
 const inputGroup = document.querySelectorAll('.seciton-form__input');
-
 const nameInput = document.querySelector('#name');
 const surnameInput = document.querySelector('#surname');
 const patronymicInput = document.querySelector('#patronymic');
@@ -12,13 +9,57 @@ const birthdateInput = document.querySelector('#birthdate');
 const studyyearInput = document.querySelector('#studyyear');
 const facultyInput = document.querySelector('#faculty');
 
+const formTable = document.querySelector('.section-students__table');
+
 let birthdateInputArray = [];
 let validArray = [];
-let uniqArray;
-let studentPreObject = {}
-let validCounter = 0;
+let uniqArray = [];
+let inputsArray = []
+let studentPreObject = {};
 let errorText = '';
 let isInvalid = false; 
+
+const elementAdding = (object, element, tr) => {
+  switch (element) {
+    case 'name':
+      let newTdName = document.createElement("td");
+      newTdName.innerHTML = object.name;
+      tr.append(newTdName);
+      formTable.append(tr)
+    break;
+    case 'surname':
+      let newTdSurname = document.createElement("td");
+      newTdSurname.innerHTML = object.surname;
+      tr.append(newTdSurname);
+      formTable.append(tr)
+    break;
+    case 'patronymic':
+      let newTdPatronymic = document.createElement("td");
+      newTdPatronymic.innerHTML = object.patronymic;
+      tr.append(newTdPatronymic);
+      formTable.append(tr)
+    break;
+    case 'birthdate':
+      let newTdBirthdate = document.createElement("td");
+      newTdBirthdate.innerHTML = object.birthdate;
+      tr.append(newTdBirthdate);
+      formTable.append(tr)
+
+    break;
+    case 'studyyear':
+      let newTdStudyyear = document.createElement("td");
+      newTdStudyyear.innerHTML = object.studyyear;
+      tr.append(newTdStudyyear);
+      formTable.append(tr)
+    break;
+      case 'faculty':
+        let newTdFaculty = document.createElement("td");
+        newTdFaculty.innerHTML = object.faculty;
+        tr.append(newTdFaculty);
+        formTable.append(tr)
+    break;
+  };
+}
 
 const addValid = (input) => {
   let error = input.nextSibling.nextSibling;
@@ -44,31 +85,6 @@ const addInValid = (input, errorText) => {
   isInvalid = true;
 }
 
-const makeUniq = (validArray) => {
-  uniqArray = new Set(validArray);
-  return [...uniqArray];
-}
-
-const noDigitsNEng= (event) => {
-  if ("1234567890".indexOf(event.key) != -1 || "qwertyuiopasdfghjklzxcvbnm".indexOf(event.key) != -1)
-    event.preventDefault();
-}
-
-const digits = (event) => {
-  if (event.keyCode < 48 || event.keyCode > 57)
-  event.returnValue= false;
-}
-
-const disableBtn = (button) => {
-  button.disabled = true;
-  button.classList.add('disabled');
-}
- 
-const ableBtn = (button) => {
-  button.disabled = false;
-  button.classList.remove('disabled');
-}
-
 const removeInvalid = (input) => {
   let error = input.nextSibling.nextSibling;
   error.classList.add('d-none')
@@ -76,6 +92,75 @@ const removeInvalid = (input) => {
   input.classList.remove('invalid');
   input.classList.remove('mb-1');
 }
+
+const removeValid = (input) => {
+  input.classList.remove('valid');
+}
+
+
+const symbolRemover = () => {
+  let keyNum = window.event.keyCode
+  if(keyNum == 8) {
+    let string = event.target.value;
+    let last = string.slice(-1);
+    if (last == '/' || last == '-') {
+      string = string.slice(0, -1);
+      event.target.value = string;
+    }
+    if (last == ')') {
+      let stringArray = Array.from(string)
+      let newStringArray = [];
+      stringArray.forEach((element, index) => {
+        if(index < 10) {
+          newStringArray.push(element);
+        }
+      })
+      let newString = String(newStringArray.join(''))
+      event.target.value = newString;
+    }
+    if (last == '}') {
+      let stringArray = Array.from(string)
+      let newStringArray = [];
+      stringArray.forEach((element, index) => {
+        if(index < 4) {
+          newStringArray.push(element);
+        }
+      })
+      let newString = String(newStringArray.join(''))
+      event.target.value = newString;
+    };
+  };
+};
+
+const pushElems = (element) => {
+  if(element !== undefined) {
+    inputsArray.push(element)
+  }
+};
+
+const makeUniq = (array) => {
+  uniqArray = new Set(array);
+  return [...uniqArray];
+};
+const noDigitsNEng= (event) => {
+  if ("1234567890".indexOf(event.key) != -1 || "qwertyuiopasdfghjklzxcvbnm".indexOf(event.key) != -1)
+    event.preventDefault();
+};
+
+const digits = (event) => {
+  if (event.keyCode < 48 || event.keyCode > 57)
+  event.returnValue= false;
+};
+
+const disableBtn = (button) => {
+  button.disabled = true;
+  button.classList.add('disabled');
+};
+ 
+const ableBtn = (button) => {
+  button.disabled = false;
+  button.classList.remove('disabled');
+};
 
 const birthdateValidation = () => {
     let input = event.target;
@@ -85,7 +170,7 @@ const birthdateValidation = () => {
       input.setAttribute('maxlength', 15);
     }
     let todayDate;
-    let length = birthdateInputArray.lengt;
+    let length = birthdateInputArray.length;
     let inputLength = input.value.length;
 
     switch (inputLength) {
@@ -146,7 +231,6 @@ const birthdateValidation = () => {
       let month = input.value.slice(3, -5)
       let year = input.value.slice(-4)
       if(year < 1900 || year > currentYear) {
-        console.log(year)
         errorText = 'Указан некорректный год';
         addInValid(input, errorText);
         input.maxlength = 10;
@@ -162,75 +246,129 @@ const birthdateValidation = () => {
         addInValid(input, errorText)
       }
     };
+};
 
-    let date = new Date()
-    // console.log(Date.now());
-    // console.log(date.getFullYear());
-    // console.log(date.getMonth());
-    // console.log(date.getDate());
+const studyyearValidation = () => {
+  let input = event.target
+  let currentYear = new Date().getFullYear()
+  let endMonth = new Date().getMonth();
+
+  let inputLength = input.value.length;
+
+  
+  if(inputLength == 4) {
+    let testSting = input.value.slice();
+    let endYear = Number(testSting) + 4;
+    if(Number(testSting) < 1918 || Number(testSting) > currentYear) {
+      errorText = 'Указан некорректный год начала обучения';
+      addInValid(input, errorText);
+      input.maxlength = 4;
+    } else {
+      input.maxlength = 18;
+      if((currentYear - testSting) > 4 || (endMonth > 9 && endYear < currentYear)) {
+        input.value = input.value + '-' + endYear + ' ' + '{закончил}'
+      } else {
+        if(currentYear - testSting == 1) {
+          input.value = input.value + '-' + endYear + ' ' + `{${currentYear - testSting} год}`
+        }
+        if(currentYear - testSting == 2 || currentYear - testSting == 3 || currentYear - testSting == 4) {
+          input.value = input.value + '-' + endYear + ' ' + `{${currentYear - testSting} года}`
+        }
+        if(currentYear - testSting == 0) {
+          if(endMonth == 1) {
+            input.value = input.value + '-' + endYear + ' ' + `{${endMonth} месяц}`
+          } else if(endMonth == 2 || endMonth == 3 || endMonth == 4) {
+            input.value = input.value + '-' + endYear + ' ' + `{${endMonth} месяца}`
+          } else {
+            input.value = input.value + '-' + endYear + ' ' + `{${endMonth} месяцев}`
+          }
+        }
+      }
+      addValid(input)
+    }
+  };
+};
+
+const textValidation = () => {
+    let input = event.target;
+    if(input.value.length >= 3) {
+      addValid(input);
+    } else {
+      errorText = 'Минимум 3 символа'
+      addInValid(input, errorText);
+    };
 };
 
 const inputValidation = () => {
     let input = event.target;
     switch (input) {
         case nameInput:
+          textValidation()
           if(input.value.length >= 3) {
-            addValid(input);
-            studentPreObject.name = input;
+            studentPreObject.name = input.value;
           } else {
-            errorText = 'Минимум 3 символа'
-            addInValid(input, errorText);
-            delete studentPreObject.name;
+            removeValid(input)
+            delete studentPreObject.name
           };
         break;
         case surnameInput:
+          textValidation()
           if(input.value.length >= 3) {
-            addValid(input);
-            studentPreObject.surname = input;
+            studentPreObject.surname = input.value;
           } else {
-            errorText = 'Минимум 3 символа'
-            addInValid(input, errorText);
+            removeValid(input)
             delete studentPreObject.surname;
           };
         break;
         case patronymicInput:
+          textValidation();
           if(input.value.length >= 3) {
-            addValid(input);
-            studentPreObject.patronymic = input;
+            studentPreObject.patronymic = input.value;
           } else {
+            removeValid(input)
             errorText = 'Минимум 3 символа';
-            addInValid(input, errorText);
             delete studentPreObject.patronymic;
           };
         break;
         case birthdateInput:
             birthdateValidation();
+            if(input.value.length < 4) {
+              delete studentPreObject.birthdate;
+              removeValid(input)
+            } else {
+              studentPreObject.birthdate = input.value;
+            }
         break;
         case studyyearInput:
-            console.log(5);
-            break;
+            studyyearValidation();
+            if(input.value.length < 4) {
+              delete studentPreObject.studyyear;
+              removeValid(input)
+            } else {
+              studentPreObject.studyyear = input.value;
+            }
+        break;
           case facultyInput:
-            console.log(6);
-          break;
-        default:
-            console.log(7);
-      };
-
-      makeUniq(validArray);
+            textValidation();
+            if(input.value.length >= 3) {
+              studentPreObject.faculty = input.value;
+            } else {
+              removeValid(input)
+              errorText = 'Минимум 3 символа';
+              delete studentPreObject.faculty;
+            };
+        break;
+    };
       
-      if(document.querySelectorAll('.invalid').length) {
-        disableBtn(document.querySelector('.section-form__submit-button'));
-      } else {
-        ableBtn(document.querySelector('.section-form__submit-button'));
-      };
-      if(uniqArray.length !== 6) {
-        disableBtn(document.querySelector('.section-form__submit-button'));
-      } else {
-        ableBtn(document.querySelector('.section-form__submit-button'));
-      };
-      // for (key in studentPreObject) {
-      //   console.log(key)
-      // }
+    if(document.querySelectorAll('.invalid').length >= 1) {
+      disableBtn(document.querySelector('.section-form__submit-button'));
+    } else if (document.querySelectorAll('.valid').length == 6) {
+      ableBtn(document.querySelector('.section-form__submit-button'));
+      document.querySelectorAll('.valid').forEach((element) => {
+        pushElems(element);
+      })
+      makeUniq(inputsArray)
+    };
 };
 
 inputGroup.forEach((input) => {
@@ -244,32 +382,24 @@ inputGroup.forEach((input) => {
     }
 });
 
-birthdateInput.addEventListener('keydown', () => {
-  let keyNum = window.event.keyCode
-  if(keyNum == 8) {
-    removeInvalid(event.target);
-    birthdateInputArray = [];
-    let string = event.target.value;
-    let last = string.slice(-1);
-    if (last == '/') {
-      string = string.slice(0, -1);
-      event.target.value = string;
-    }
-    if (last == '(') {
-      string = string.slice(0, -2);
-      event.target.value = string;
-    }
-  }
-})
 
-birthdateInput.addEventListener('cut', (event) => {
-  console.log(event.target)
-})
+birthdateInput.addEventListener('keydown', symbolRemover);
+studyyearInput.addEventListener('keydown', symbolRemover);
+
+// birthdateInput.addEventListener('cut', (event) => {
+//   console.log(event.target)
+// })
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
-  form.classList.add('d-none');
-  showButton.classList.remove('d-none');
+  let newTR = document.createElement("tr")
+  newTR.classList.add('section-students__table-body')
+  
+  for(element in studentPreObject) {
+    elementAdding(studentPreObject, element, newTR)
+  };
+  
+  // form.classList.add('d-none');
+  // showButton.classList.remove('d-none');
 });
-
 })();

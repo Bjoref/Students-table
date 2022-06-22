@@ -21,6 +21,10 @@ body {
   color: black;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .disabled:hover {
   background-color: var(--disabled-color);
   color: black;
