@@ -8,8 +8,9 @@ const patronymicInput = document.querySelector('#patronymic');
 const birthdateInput = document.querySelector('#birthdate');
 const studyyearInput = document.querySelector('#studyyear');
 const facultyInput = document.querySelector('#faculty');
-
 const formTable = document.querySelector('.section-students__table');
+
+const studentsArray = [];
 
 let birthdateInputArray = [];
 let validArray = [];
@@ -19,47 +20,60 @@ let studentPreObject = {};
 let errorText = '';
 let isInvalid = false; 
 
-const elementAdding = (object, element, tr) => {
+const tableFilling = (element, object, tr) => {
+  if(tr == undefined) {
+    tr = document.createElement("tr") 
+    tr.classList.add('section-students__table-body')
+  }
   switch (element) {
     case 'name':
       let newTdName = document.createElement("td");
-      newTdName.innerHTML = object.name;
+      newTdName.classList.add('section-students__table-col')
+      newTdName.innerHTML = object.name.trim() + ' ' + object.patronymic.trim() + ' ' + object.surname.trim();
       tr.append(newTdName);
-      formTable.append(tr)
-    break;
-    case 'surname':
-      let newTdSurname = document.createElement("td");
-      newTdSurname.innerHTML = object.surname;
-      tr.append(newTdSurname);
-      formTable.append(tr)
-    break;
-    case 'patronymic':
-      let newTdPatronymic = document.createElement("td");
-      newTdPatronymic.innerHTML = object.patronymic;
-      tr.append(newTdPatronymic);
       formTable.append(tr)
     break;
     case 'birthdate':
       let newTdBirthdate = document.createElement("td");
-      newTdBirthdate.innerHTML = object.birthdate;
+      newTdBirthdate.classList.add('section-students__table-col')
+      newTdBirthdate.innerHTML = object.birthdate.trim();
       tr.append(newTdBirthdate);
       formTable.append(tr)
 
     break;
     case 'studyyear':
       let newTdStudyyear = document.createElement("td");
-      newTdStudyyear.innerHTML = object.studyyear;
+      newTdStudyyear.classList.add('section-students__table-col')
+      newTdStudyyear.innerHTML = object.studyyear.trim();
       tr.append(newTdStudyyear);
       formTable.append(tr)
     break;
-      case 'faculty':
-        let newTdFaculty = document.createElement("td");
-        newTdFaculty.innerHTML = object.faculty;
-        tr.append(newTdFaculty);
-        formTable.append(tr)
+    case 'faculty':
+      let newTdFaculty = document.createElement("td");
+      newTdFaculty.classList.add('section-students__table-col')
+      newTdFaculty.innerHTML = object.faculty.trim();
+      tr.append(newTdFaculty);
+      formTable.append(tr)
     break;
   };
 }
+const elementAdding = (object, element, tr) => {
+  tableFilling(element, object, tr);
+}
+
+if(localStorage.getItem('studentsArray') !== null) {
+  studentsArray.push(JSON.parse(localStorage.getItem('studentsArray')))
+}
+studentsArray.forEach((element) => {
+  element.forEach((item) => {
+    let tr = document.createElement("tr") 
+    tr.classList.add('section-students__table-body')
+    for(i in item){
+      tableFilling(i, item, tr)
+    }
+  })
+})
+
 
 const addValid = (input) => {
   let error = input.nextSibling.nextSibling;
@@ -398,8 +412,24 @@ form.addEventListener('submit', (event) => {
   for(element in studentPreObject) {
     elementAdding(studentPreObject, element, newTR)
   };
-  
+  let localStorageArray = [];
+  let savedArray = JSON.parse(localStorage.getItem('studentsArray'));
+  if(savedArray !== null) {
+    savedArray.forEach((element) => {
+      localStorageArray.push(element);
+    })
+  }
+  localStorageArray.push(studentPreObject);
+  localStorage.clear()
+  localStorageArray.forEach((element, index) => {
+    if(element == null) {
+      localStorageArray.splice(index, 1)
+    }
+  })
+  localStorage.setItem("studentsArray", JSON.stringify(localStorageArray));
+
   form.classList.add('d-none');
   showButton.classList.remove('d-none');
 });
+// localStorage.clear()
 })();
