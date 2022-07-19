@@ -1,7 +1,6 @@
 @import url(/src/css/section-students/__table-col/_header/section-students__table-col_header.css);
 
 .section-students__table-col {
-    padding: 10px;
     width: 200px;
     text-align: center;
 }

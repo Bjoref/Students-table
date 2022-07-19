@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="src/css/style.css">
 
     <script src="src/js/section-students/__button/section-students__button.js" defer></script>
+    <script src="src/js/section-students/__button/_clearLocal/section-students__button_clearLocal.js" defer></script>
     <script src="src/js/section-form/__form/section-form__form.js" defer></script>
     <script src="src/js/section-form/__button/section-form__button.js" defer></script>
     <script src="src/js/section-form/__close-form/section-form__close-form.js" defer></script>
@@ -20,10 +21,26 @@
             <div class="container section-students__container">
                 <table class="section-students__table" border="1" cellspacing="1" cellpadding="1">
                     <tr class="section-students__table-header">
-                       <td class="section-students__table-col_header section-students__table-col" id="fullName">ФИО</td>
-                       <td class="section-students__table-col_header section-students__table-col" id="birthdateCol">дата рождения</td>
-                       <td class="section-students__table-col_header section-students__table-col" id="studyyearCol">год начала обучения</td>
-                       <td class="section-students__table-col_header section-students__table-col" id="facultyCol">факультет</td>
+                        <td class="section-students__table-col_header section-students__table-col" id="fullName">
+                            <button class="section-students__col-button pointer">
+                                ФИО
+                            </button>
+                        </td>
+                        <td class="section-students__table-col_header section-students__table-col" id="birthdateCol">
+                            <button class="section-students__col-button pointer">
+                                Дата рождения
+                            </button>
+                        </td>
+                        <td class="section-students__table-col_header section-students__table-col" id="studyyearCol">
+                            <button class="section-students__col-button pointer">
+                                Год начала обучения
+                            </button>
+                        </td>
+                        <td class="section-students__table-col_header section-students__table-col" id="facultyCol">
+                            <button class="section-students__col-button pointer">
+                                Факультет
+                            </button>
+                        </td>
                     </tr>
                     <tr class="section-students__table-body">
                        <!-- <td class="section-students__table-col">Ячейка 4</td>
@@ -47,6 +64,9 @@
                     src="src/img/section-students/__arrow-icon/section-students__arrow-icon.svg"
                     alt="arrow-icon">
                     Показать таблицу
+                 </button>
+                 <button class="section-students__button_clearLocal">
+                    Отчистить localStorage
                  </button>
             </div>
         </section>
